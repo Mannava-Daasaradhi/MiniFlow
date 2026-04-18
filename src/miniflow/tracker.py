@@ -1,8 +1,8 @@
 import sqlite3
-from typing import List, Dict, Any
-from miniflow.db import get_connection, DEFAULT_DB_PATH
+from miniflow.db import DBUtils
 from miniflow import utils
-
+from miniflow.db import DEFAULT_DB_PATH
+from typing import Any, Dict, List, Union
 class ExperimentTracker:
     def __init__(self, name: str, db_path: str = DEFAULT_DB_PATH):
         """
@@ -15,7 +15,7 @@ class ExperimentTracker:
         git_hash = utils.get_git_hash()
         timestamp = utils.now_iso()
         
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             conn.execute(
                 """
@@ -34,7 +34,7 @@ class ExperimentTracker:
         All values are cast to strings.
         Raises ValueError if a key is logged twice for the same run.
         """
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             for key, value in params.items():
                 try:
@@ -64,7 +64,7 @@ class ExperimentTracker:
         utils.validate_finite(value, key)
         timestamp = utils.now_iso()
         
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             conn.execute(
                 """
@@ -82,7 +82,7 @@ class ExperimentTracker:
         if status not in ("finished", "failed"):
             raise ValueError("Status must be 'finished' or 'failed'")
             
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             conn.execute(
                 "UPDATE runs SET status = ? WHERE run_id = ?",
@@ -96,7 +96,7 @@ class ExperimentTracker:
         """
         Returns list of run dicts stitched together from 3 tables.
         """
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             # 1. Fetch the core run rows
             query = "SELECT * FROM runs"
@@ -163,7 +163,7 @@ class ExperimentTracker:
             "metrics": {}
         }
         
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             placeholders = ",".join(["?"] * len(run_ids))
             
@@ -202,7 +202,7 @@ class ExperimentTracker:
         if mode not in ("min", "max"):
             raise ValueError("Mode must be 'min' or 'max'")
             
-        conn = get_connection(self.db_path)
+        conn = DBUtils.get_connection(self.db_path)
         try:
             # Subquery finds the max step for each run's metric, 
             # outer query gets the actual value at that step.
