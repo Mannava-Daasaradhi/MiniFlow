@@ -1,4 +1,4 @@
-# P1a — MiniFlow MLOps v0.1
+ P1a — MiniFlow MLOps v0.1
 
 > **Domain:** AI/ML · **Year:** 1 · **Months:** 1–1 · **Daily Time Budget:** 1.5 hrs  
 > **Legal Status:** ✅ Safe — no legal restrictions  
