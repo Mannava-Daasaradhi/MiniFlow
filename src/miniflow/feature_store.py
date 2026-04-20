@@ -14,9 +14,9 @@ DTYPE_MAP = {
 }
 
 class FeatureStore:
-    def __init__(self, db_path: str = DEFAULT_DB_PATH):
-        """Standard init, same db_path pattern as above."""
-        self.db_path = db_path
+    def __init__(self, db_path: str | None = None):
+        """Standard init, dynamically evaluating db_path."""
+        self.db_path = db_path or DEFAULT_DB_PATH
 
     def define(self, name: str, dtype: str, version: int = 1, description: str = "") -> None:
         """

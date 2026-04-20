@@ -3,13 +3,14 @@ from miniflow.db import DBUtils
 from miniflow import utils
 from miniflow.db import DEFAULT_DB_PATH
 from typing import Any, Dict, List, Union
+
 class ExperimentTracker:
-    def __init__(self, name: str, db_path: str = DEFAULT_DB_PATH):
+    def __init__(self, name: str, db_path: str | None = None):
         """
         Creates a new run immediately on instantiation.
         """
         self.name = name
-        self.db_path = db_path
+        self.db_path = db_path or DEFAULT_DB_PATH
         self.run_id = utils.generate_run_id()
         
         git_hash = utils.get_git_hash()

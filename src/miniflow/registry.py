@@ -6,7 +6,7 @@ from miniflow import utils
 from miniflow.db import DEFAULT_DB_PATH
 
 class ModelRegistry:
-    def __init__(self, storage_dir: str = None, db_path: str = DEFAULT_DB_PATH):
+    def __init__(self, storage_dir: str | None = None, db_path: str | None = None):
         """
         storage_dir: where model artifacts (pickle files) are saved
         Defaults to ~/.miniflow/models/
@@ -15,9 +15,7 @@ class ModelRegistry:
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         
         # db_path is passed to db functions for registry operations
-        self.db_path = db_path
-
-
+        self.db_path = db_path or DEFAULT_DB_PATH
 
     def save(self, name: str, model_obj: Any, metadata: Dict[str, Any] = None) -> str:
         """
