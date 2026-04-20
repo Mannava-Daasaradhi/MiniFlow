@@ -135,4 +135,7 @@ pytest tests/ -v --cov=miniflow --cov-report=term-missing
 
 ---
 
+## Quick Demo
+[Run the full demo script](https://gist.github.com/Mannava-Daasaradhi/a2a70bf5a3aa05813b34d01d1718b53b)
+
 *Engineered a foundational MLOps library from the ground up.*
