@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "miniflow"
+version = "0.1.0"
+description = "Minimal MLOps primitives: ExperimentTracker, ModelRegistry, FeatureStore"
+authors = [{name = "Mannava Daasaradhi", email = "daasaradhimannava@gmail.com"}]
+requires-python = ">=3.10"
+dependencies = ["click", "pyyaml"]
+
+[project.scripts]
+miniflow = "miniflow.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
