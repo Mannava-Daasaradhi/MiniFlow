@@ -595,9 +595,3 @@ miniflow features list
 
 At 1.5 hrs/day this is a 5-day project. Finish it in Week 1.
 
----
-
-*This README is part of the Sovereign Vantablack 365-day plan. Next project: [P1b — MiniFlow v2.0 Production](../P1b_MiniFlow_v2.0_Production/README.md)*
-#MINIFLOW
- 
- 
